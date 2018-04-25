@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
 
-    <!-- Icons for materialize --> 
+    <!-- Icons for materialize -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Compiled and minified CSS -->
@@ -20,6 +20,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <div class="right">
+        <% if user_signed_in? %>
+          Welcome <%= link_to current_user.display_name, profile_path %>
+          <%= link_to 'logout', destroy_user_session_path, method: 'DELETE' %>
+        <% else %>
+          Please <%= link_to 'login', new_user_session_path %>
+          or <%= link_to 'register', new_user_registration_path %>
+        <% end %>
+      </div>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

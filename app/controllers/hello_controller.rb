@@ -1,4 +1,6 @@
 class HelloController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @tweets = [
       { id: 1, name: "Joe",  body: "My first tweet #w00t", color: 'red'},
